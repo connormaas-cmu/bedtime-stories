@@ -9,7 +9,6 @@ const handler = async (event) => {
   try {
     const body = JSON.parse(event.body);  
     const text = body.prompt;
-    throw new Error(text)
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
     const API_HOST = 'omniinfer.p.rapidapi.com';
 
@@ -28,28 +27,12 @@ const handler = async (event) => {
     }
 
     const { task_id } = await response.json();
+    
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ task_id })
+    };
 
-    let imageResponse;
-    while (true) {
-      imageResponse = await fetch(`https://omniinfer.p.rapidapi.com/v2/progress?task_id=${task_id}`, {
-        headers: {
-          'X-RapidAPI-Key': API_KEY,
-          'X-RapidAPI-Host': API_HOST
-        }
-      });
-
-      if (imageResponse.ok) {
-        const { image_url } = await imageResponse.json();
-        if (image_url) {
-          return {
-            statusCode: 200,
-            body: JSON.stringify({ image_url })
-          };
-        }
-      }
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }; 
   }

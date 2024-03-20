@@ -1,33 +1,34 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    const userInput = sessionStorage.getItem('userInput'); // Retrieve user input
+    const userInput = sessionStorage.getItem('userInput');
     const storyElement = document.getElementById('story');
     const imageElement = document.getElementById('image');
 
-    storyElement.textContent = "Generating image..."; // Notify user that image is being generated
+    storyElement.textContent = "Generating image...";
 
     fetch('/.netlify/functions/generate-image', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
     })
-    .then(async response => {
-        response.text().then(text => alert(text));
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response);
-        }
-        const { image_url } = await response.json();
-        // Update storyElement with the image URL
-        storyElement.textContent = "Image generated!"; 
-        // Update imageElement to display the generated image
-        imageElement.src = image_url;
+    .then(response => response.json())
+    .then(data => {
+        const { task_id } = data;
+        const checkStatus = () => {
+            fetch(`/.netlify/functions/check-image-status?task_id=${task_id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.image_url) {
+                    storyElement.textContent = "Image generated!";
+                    imageElement.src = data.image_url;
+                } else {
+                    setTimeout(checkStatus, 2000);
+                }
+            });
+        };
+        checkStatus();
     })
     .catch(error => {
-        console.error('Error generating image:', error);
-        alert(error)
-        storyElement.textContent = "Failed to generate image. Limit exceeded for today"; // Notify user of failure
+        console.error('Error:', error);
+        storyElement.textContent = "Failed to generate image.";
     });
 });
-
-
