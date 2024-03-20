@@ -11,6 +11,19 @@ const handler = async (event) => {
     const text = body.prompt;
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
     const API_HOST = 'omniinfer.p.rapidapi.com';
+    const input = {
+      "negative_prompt": "nsfw, watermark, facial distortion, lip deformity, redundant background, extra fingers, Abnormal eyesight, ((multiple faces)), ((Tongue protruding)), ((extra arm)), extra hands, extra fingers, deformity, missing legs, missing toes, missin hand, missin fingers, (painting by bad-artist-anime:0.9), (painting by bad-artist:0.9), watermark, text, error, blurry, jpeg artifacts, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, artist name, (worst quality, low quality:1.4), bad anatomy",
+      "sampler_name": "Euler a",
+      "batch_size": 1,
+      "n_iter": 1,
+      "steps": 20,
+      "cfg_scale": 7,
+      "seed": -1,
+      "height": 1024,
+      "width": 768,
+      "model_name": "meinamix_meinaV9.safetensors",
+      "prompt": text
+    }
 
     const response = await fetch('https://omniinfer.p.rapidapi.com/v2/txt2img', {
       method: 'POST',
@@ -19,7 +32,7 @@ const handler = async (event) => {
         'X-RapidAPI-Key': API_KEY,
         'X-RapidAPI-Host': API_HOST
       },
-      body: JSON.stringify({ text })
+      body: JSON.stringify(input)
     });
 
     if (!response.ok) {

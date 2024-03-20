@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const storyElement = document.getElementById('story');
     const imageElement = document.getElementById('image');
 
-    storyElement.textContent = "Generating image...";
-
     fetch('/.netlify/functions/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     } else {
                         const data = JSON.parse(textContent);
                         imageElement.src = data.image;
-                        alert(data)
                         imageElement.src = data.image
                     }
                 })
