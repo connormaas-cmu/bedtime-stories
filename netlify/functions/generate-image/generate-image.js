@@ -7,12 +7,12 @@ async function setupFetch() {
 const handler = async (event) => { 
   const fetch = await setupFetch();
   try {
-    const { text } = JSON.parse(event.body); 
-    alert(event.body)
+    throw new Error(event.body)
+    const { text } = JSON.parse(event.body);  
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
     const API_HOST = 'omniinfer.p.rapidapi.com';
 
-    const response = await fetch('https://omniinfer.p.rapidapi.com/v2/txt2im', {
+    const response = await fetch('https://omniinfer.p.rapidapi.com/v2/txt2img', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
