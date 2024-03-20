@@ -27,10 +27,11 @@ const handler = async (event) => {
     const images = res.data.imgs
 
     if (images) {
-      const image = images[0]
+      const image = JSON.parse(images[0])
+      const url = image.image
       return {
         statusCode: 200,
-        body: JSON.stringify({ image })
+        body: JSON.stringify({ url })
       };
     } else {
       return {
