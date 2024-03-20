@@ -20,10 +20,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(response => response.json())
             .then(data => {
                 alert("here")
-                const d = JSON.parse(data)
-                alert(d)
-                const s = d.text()
-                alert(s)
                 if (data.image_url) {
                     storyElement.textContent = "Image generated!";
                     imageElement.src = data.image_url;
