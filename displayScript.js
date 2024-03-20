@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     alert("Error checking status: " + error);
                 });
         };
-        
+        alert("checking")
         checkStatus(new Date());
     })
     .catch(error => {
