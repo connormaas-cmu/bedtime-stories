@@ -16,3 +16,4 @@ document.addEventListener('DOMContentLoaded', async function() {
     storyElement.textContent = data.story; // Display generated story
     imageElement.src = data.image; // Display generated image
 });
+
