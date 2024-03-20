@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
             .then(response => response.json())
             .then(data => {
+                alert("here")
                 const d = JSON.parse(data)
                 alert(d)
                 const s = d.text()
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
             })
             .catch(error => {
-                alert(error);
+                alert("error man: " + error);
             });
         };
         checkStatus();
