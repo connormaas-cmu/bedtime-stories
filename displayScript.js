@@ -25,10 +25,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textContent => {
                     if (textContent.includes("Image is still being processed.")) {
-                        alert(textContent); 
-                        setTimeout(() => checkStatus(startTime), 10000);
+                        setTimeout(() => checkStatus(startTime), 2000);
                     } else {
-                        alert("Image URL: " + textContent); 
+                        imageElement.src = imageUrl
                     }
                 })
                 .catch(error => {

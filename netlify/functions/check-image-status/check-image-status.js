@@ -27,7 +27,7 @@ const handler = async (event) => {
     const images = res.data.imgs
 
     if (images) {
-      const image = images[0].image
+      const image = images[0]
       return {
         statusCode: 200,
         body: JSON.stringify({ image })
