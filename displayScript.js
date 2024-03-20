@@ -15,27 +15,27 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = JSON.parse(textResponse);
         const innerData = JSON.parse(data.task_id);
         const taskId = innerData.data.task_id; 
-        const checkStatus = () => {
+        const checkStatus = (startTime) => {
+            if (new Date() - startTime > 30000) { // Stop after 30 seconds
+                alert("Timeout: Image generation took too long.");
+                return;
+            }
+        
             fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
-            .then(response => {
-                response.text().then(textContent => {
-                    alert(textContent);
+                .then(response => response.text())
+                .then(textContent => {
+                    if (textContent.includes("Image is still being processed")) {
+                        setTimeout(() => checkStatus(startTime), 2000); 
+                    } else {
+                        alert("Image URL: " + textContent); 
+                    }
                 })
-            })
-            .then(data => {
-                alert("here")
-                if (data.image_url) {
-                    storyElement.textContent = "Image generated!";
-                    imageElement.src = data.image_url;
-                } else {
-                    setTimeout(checkStatus, 2000);
-                }
-            })
-            .catch(error => {
-                alert("error man: " + error);
-            });
+                .catch(error => {
+                    alert("Error checking status: " + error);
+                });
         };
-        checkStatus();
+        
+        checkStatus(new Date());
     })
     .catch(error => {
         storyElement.textContent = "Failed to generate image." + error;
