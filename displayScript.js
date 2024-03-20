@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.text())
     .then(textResponse => {
         const story = JSON.parse(textResponse);
-        alert(story.text())
-        storyElement.textContent = story.result
+        alert(textResponse)
+        storyElement.textContent = textResponse
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate story.";
+        storyElement.textContent = "Failed to generate story." + error;
     });
 
     // generate image
