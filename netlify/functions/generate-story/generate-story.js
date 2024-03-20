@@ -1,13 +1,11 @@
-async function openaiSetup() {
-    const { default: OpenAI } = await import('openai')
-    const key = process.env.TEXT_API_KEY
-    return new OpenAI({ apiKey: key });
+async function setupFetch() {
+    const module = await import('node-fetch');
+    return module.default;
 }
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-    const openai = await openaiSetup()
-
+    const fetch = await setupFetch();
     try {
         const { prompt } = JSON.parse(event.body);
 
