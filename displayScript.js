@@ -18,10 +18,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
             .then(response => {
-                if (response.headers.get('Content-Type').includes('application/json')) {
-                    return response.json();
-                }
-                throw new Error('Response not in JSON format');
+                alert(response);
+                alert(response.text())
             })
             .then(data => {
                 alert("here")
