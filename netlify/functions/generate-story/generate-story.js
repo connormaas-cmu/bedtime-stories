@@ -22,14 +22,9 @@ const handler = async (event) => {
                 }
             ],
             "web_access": false,
-            "system_prompt": "",
-            "temperature": 0.9,
-            "top_k": 5,
-            "top_p": 0.9,
-            "max_tokens": 256
         }
 
-        const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
+        const response = await fetch('https://open-ai21.p.rapidapi.com/conversationllama', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

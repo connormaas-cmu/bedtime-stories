@@ -10,7 +10,11 @@ body, html {
 }
 
 input, button {
-    margin: 10px;
+    margin: 10%;
+}
+
+textcontainer {
+    max-width: 1000px
 }
 
 #image {
