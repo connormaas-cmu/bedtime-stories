@@ -4,6 +4,11 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
 input, button {
     margin: 10px;
 }
@@ -15,13 +20,5 @@ input, button {
     height: auto;
     display: block;
     margin: auto;
-    padding: 10%; /* Cushion */
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
+    padding: 10%;
 }
