@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         checkStatus();
     })
     .catch(error => {
-        console.error('Error:', error);
-        storyElement.textContent = "Failed to generate image.";
+        storyElement.textContent = "Failed to generate image." + error;
     });
 });
