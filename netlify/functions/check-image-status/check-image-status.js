@@ -26,7 +26,7 @@ const handler = async (event) => {
     const res = JSON.parse(response);
     const images = res.data.imgs
 
-    if (images.length()) {
+    if (images) {
       const image = images[0]
       return {
         statusCode: 200,
