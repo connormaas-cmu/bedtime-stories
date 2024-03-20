@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const storyElement = document.getElementById('story');
     const imageElement = document.getElementById('image');
 
+    // generate story
     fetch('/.netlify/functions/generate-story', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,12 +12,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.json())
     .then(data => {
         storyElement.textContent = data.story;
+        alert(data.story)
     })
     .catch(error => {
         console.error('Error:', error);
         storyElement.textContent = "Failed to generate story.";
     });
 
+    // generate image
     fetch('/.netlify/functions/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
