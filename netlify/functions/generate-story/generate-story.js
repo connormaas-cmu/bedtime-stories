@@ -7,9 +7,10 @@ async function setupFetch() {
 const handler = async (event) => {
     const fetch = await setupFetch();
     try {
-        const { prompt } = JSON.parse(event.body);
+        const body = JSON.parse(event.body);  
+        const text = body.prompt;
 
-        throw new Error(prompt)
+        throw new Error(text)
 
         const API_KEY = process.env.API_KEY;
         const API_HOST = 'open-ai21.p.rapidapi.com';
