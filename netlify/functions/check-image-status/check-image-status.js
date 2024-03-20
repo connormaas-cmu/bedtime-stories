@@ -23,6 +23,8 @@ const handler = async (event) => {
     }
 
     const { data } = await imageResponse.json();
+
+    throw new Error(data)
     const images = data.imgs
 
     if (images.length() > 0) {
