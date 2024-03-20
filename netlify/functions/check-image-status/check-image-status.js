@@ -23,10 +23,8 @@ const handler = async (event) => {
     }
 
     const response = await imageResponse.text()
-
-    throw new Error(response)
-
     const data = JSON.parse(response);
+    throw new Error(data)
     const images = data.imgs
 
     throw new Error(images)
