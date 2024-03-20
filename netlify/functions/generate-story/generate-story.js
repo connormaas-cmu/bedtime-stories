@@ -18,7 +18,7 @@ const handler = async (event) => {
             "messages": [
                 {
                     "role": "user",
-                    "content": prompt
+                    "content": "Hello"
                 }
             ],
             "web_access": false,
