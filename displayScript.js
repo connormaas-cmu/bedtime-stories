@@ -11,11 +11,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .then(response => response.text())
     .then(textResponse => {
-        const data = JSON.parse(textResponse);
-        alert(data)
-        alert(data.text())
-        storyElement.textContent = data.story;
-        alert(data.story)
+        alert(textResponse)
+        const story = JSON.parse(textResponse);
+        alert(story)
     })
     .catch(error => {
         storyElement.textContent = "Failed to generate story." + error;

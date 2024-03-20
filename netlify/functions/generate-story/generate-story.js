@@ -14,12 +14,12 @@ const handler = async (event) => {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: prompt }],
         });
-  
-        const story = response.data.choices[0].message.content;
+        
+        const story = response // .data.choices[0].message.content;
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ story: story }),
+            body: JSON.stringify({ story }),
         };
 
     } catch (error) {
