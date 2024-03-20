@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
             .then(response => {
-                alert(response);
-                alert(response.text())
+                response.text().then(textContent => {
+                    alert(textContent);
+                })
             })
             .then(data => {
                 alert("here")
