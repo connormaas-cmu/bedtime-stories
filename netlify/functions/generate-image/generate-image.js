@@ -27,10 +27,10 @@ const handler = async (event) => {
     }
 
 
-    
+
     const responseText = await response.text();
 
-    alert(responseText);
+    throw new Error(responseText);
 
     const data = JSON.parse(responseText);
     const { task_id } = data;
