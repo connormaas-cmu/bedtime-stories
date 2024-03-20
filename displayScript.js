@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const innerData = JSON.parse(data.task_id);
         const taskId = innerData.data.task_id; 
         const checkStatus = (startTime) => {
-            if (new Date() - startTime > 60000) { // Stop after 30 seconds
+            if (new Date() - startTime > 300000) {
                 alert("Timeout: Image generation took too long.");
                 return;
             }
@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textContent => {
                     if (textContent.includes("Image is still being processed.")) {
-                        alert(textContent)
-                        setTimeout(() => checkStatus(startTime), 5000);
+                        setTimeout(() => checkStatus(startTime), 10000);
                     } else {
                         alert("Image URL: " + textContent); 
                     }
