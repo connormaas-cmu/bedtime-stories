@@ -24,12 +24,9 @@ const handler = async (event) => {
 
     const response = await imageResponse.text()
     const res = JSON.parse(response);
-    throw new Error(res.data.imgs)
-    const images = data.imgs
+    const images = res.data.imgs
 
-    throw new Error(images)
-
-    if (images.length() > 0) {
+    if (images.length()) {
       const image = images[0]
       return {
         statusCode: 200,
