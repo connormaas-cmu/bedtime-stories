@@ -5,7 +5,6 @@ async function openaiSetup() {
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-    throw new Error("here")
     const openai = openaiSetup()
 
     try {
