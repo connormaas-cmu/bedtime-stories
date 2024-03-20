@@ -13,10 +13,6 @@ input, button {
     margin: 10%;
 }
 
-textcontainer {
-    max-width: 1000px
-}
-
 #image {
     width: 80%;
     aspect-ratio : 1 / 1;
