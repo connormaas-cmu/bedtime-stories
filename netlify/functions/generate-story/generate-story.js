@@ -5,10 +5,10 @@ async function openaiSetup() {
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
+    throw new Error("here")
     const openai = openaiSetup()
 
     try {
-        throw new Error(JSON.parse(event.body))
         const { prompt } = JSON.parse(event.body);
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
