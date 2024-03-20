@@ -11,7 +11,7 @@ const handler = async (event) => {
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
     const API_HOST = 'omniinfer.p.rapidapi.com';
 
-    const response = await fetch('https://omniinfer.p.rapidapi.com/v1/text-to-image', {
+    const response = await fetch('https://omniinfer.p.rapidapi.com/v2/txt2img', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const handler = async (event) => {
 
     let imageResponse;
     while (true) {
-      imageResponse = await fetch(`https://omniinferapi.p.rapidapi.com/v1/progress?task_id=${task_id}`, {
+      imageResponse = await fetch(`https://omniinfer.p.rapidapi.com/v2/progress?task_id=${task_id}`, {
         headers: {
           'X-RapidAPI-Key': API_KEY,
           'X-RapidAPI-Host': API_HOST
