@@ -1,7 +1,7 @@
 async function openaiSetup() {
-    const module = await import('openai')
+    const { default: OpenAI } = await import('openai')
     const key = process.env.TEXT_API_KEY
-    return new module({ apiKey: key });
+    return new OpenAI({ apiKey: key });
 }
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
