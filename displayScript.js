@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                     if (textContent.includes("Image is still being processed.")) {
                         setTimeout(() => checkStatus(startTime), 2000);
                     } else {
-                        alert(textContent)
-                        imageElement.src = textContent
+                        const data = JSON.parse(textContent);
+                        imageElement.src = data.image;
+                        alert(data)
+                        imageElement.src = data.image
                     }
                 })
                 .catch(error => {
