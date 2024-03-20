@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const userInput = sessionStorage.getItem('userInput');
     const storyElement = document.getElementById('story');
     const imageElement = document.getElementById('image');
-    
-    storyElement.textContent = "Generating story..."
 
     // generate story
     fetch('/.netlify/functions/generate-story', {
