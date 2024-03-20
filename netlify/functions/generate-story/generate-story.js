@@ -1,6 +1,7 @@
 async function openaiSetup() {
     const module = await import('openai')
     const key = process.env.TEXT_API_KEY
+    throw new Error(key)
     return new module({ apiKey: key });
 }
 
