@@ -27,8 +27,6 @@ const handler = async (event) => {
     }
 
     const { task_id } = await response.json();
-
-    throw new Error(task_id)
     
     return {
       statusCode: 200,
