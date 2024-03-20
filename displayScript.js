@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         body: JSON.stringify({ prompt: userInput }),
     })
     .then(async response => {
-        alert(JSON.stringify(response))
+        response.text().then(text => alert(text));
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response);
         }
