@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .then(response => response.json())
     .then(data => {
-        const dat = JSON.parse(data);  
-        const task_id = dat.prompt;
+        const body = JSON.parse(data.body);  
+        const task_id = body.prompt;
         alert(task_id)
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${task_id}`)
