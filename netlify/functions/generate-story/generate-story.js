@@ -8,8 +8,6 @@ async function openaiSetup() {
 const handler = async (event) => {
     const openai = await openaiSetup()
 
-    throw new Error("test")
-
     try {
         const { prompt } = JSON.parse(event.body);
         const response = await openai.chat.completions.create({
