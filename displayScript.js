@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.json())
     .then(data => {
         storyElement.textContent = data.story;
-        alert(data.story)
     })
     .catch(error => {
         storyElement.textContent = "Failed to generate story." + error;

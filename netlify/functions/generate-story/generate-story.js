@@ -19,7 +19,7 @@ const handler = async (event) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ story }),
+            body: JSON.stringify({ story: story }),
         };
 
     } catch (error) {
