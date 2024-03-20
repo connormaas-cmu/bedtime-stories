@@ -5,7 +5,7 @@ async function setupFetch() {
 
 async function openaiSetup() {
     const module = await import('openai')
-    return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    return new OpenAI({ apiKey: process.env.TEXT_API_KEY });
 }
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
@@ -15,7 +15,6 @@ const handler = async (event) => {
 
   try {
       const { prompt } = JSON.parse(event.body);
-      const API_KEY = process.env.TEXT_API_KEY;
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: prompt }],
