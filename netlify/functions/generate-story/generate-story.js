@@ -10,16 +10,46 @@ const handler = async (event) => {
 
     try {
         const { prompt } = JSON.parse(event.body);
-        const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt }],
+
+        const API_KEY = process.env.API_KEY;
+        const API_HOST = 'open-ai21.p.rapidapi.com';
+
+        input = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "web_access": false,
+            "system_prompt": "",
+            "temperature": 0.9,
+            "top_k": 5,
+            "top_p": 0.9,
+            "max_tokens": 256
+        }
+
+        const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': API_KEY,
+            'X-RapidAPI-Host': API_HOST
+        },
+        body: JSON.stringify(input)
         });
-        
-        const story = response // .data.choices[0].message.content;
+
+        if (!response.ok) {
+            throw new Error(`Failed to generate text: ${response.statusText}`);
+        }
+
+        const res = await response.text();
+        const jsonRes = JSON.parse(res)
+        const result = jsonRes.result
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ story }),
+            body: JSON.stringify({ result })
         };
 
     } catch (error) {
