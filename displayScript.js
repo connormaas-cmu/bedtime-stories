@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
                 .then(response => response.text())
                 .then(textContent => {
-                    if (textContent.includes("Image is still being processed")) {
-                        setTimeout(() => checkStatus(startTime), 2000); 
+                    if (textContent.includes("Image is still being processed.")) {
+                        alert("checking")
+                        setTimeout(() => checkStatus(startTime), 5000);
                     } else {
                         alert("Image URL: " + textContent); 
                     }
@@ -34,8 +35,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                     alert("Error checking status: " + error);
                 });
         };
-        alert("checking")
+        
         checkStatus(new Date());
+
     })
     .catch(error => {
         storyElement.textContent = "Failed to generate image." + error;
