@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.text())
     .then(textResponse => {
         const story = JSON.parse(textResponse);
-        alert(story)
-        alert(story.result)
+        alert(story.text())
         storyElement.textContent = story.result
     })
     .catch(error => {
