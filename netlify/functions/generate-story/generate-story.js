@@ -9,6 +9,7 @@ const handler = async (event) => {
     try {
         const body = JSON.parse(event.body);  
         const text = body.prompt;
+        const story = "Create a story in the form of a children's tale about the following:\n\n'" + text + "'\n\nYou're response should be at least 500 words and should be split into paragraphs"
 
         const API_KEY = process.env.API_KEY;
         const API_HOST = 'open-ai21.p.rapidapi.com';

@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert(textResponse)
         const story = JSON.parse(textResponse);
         alert(story)
+        storyElement.textContent = story
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate story." + error;
+        storyElement.textContent = "Failed to generate story.";
     });
 
     // generate image
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     //                 } else {
     //                     const data = JSON.parse(textContent);
     //                     imageElement.src = data.image;
-    //                     imageElement.src = data.image
     //                 }
     //             })
     //             .catch(error => {
