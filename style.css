@@ -4,21 +4,24 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-.container {
-    text-align: center;
-    padding: 20px;
-}
-
 input, button {
     margin: 10px;
 }
 
 #image {
-    max-width: calc(80vw - 20%);
-    max-height: calc(80vw - 20%);
+    max-width: 750px;
+    max-height: 750px;
     width: auto;
     height: auto;
-    margin: 10vh auto; /* Adjust margin to vertically center the image */
-    max-width: 750px; /* Set maximum width to 750px */
-    max-height: 750px; /* Set maximum height to 750px */
+    display: block;
+    margin: auto;
+    padding: 10%; /* Cushion */
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
 }
