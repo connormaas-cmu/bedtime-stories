@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.text())
     .then(textResponse => {
         const data = JSON.parse(textResponse);
+        if (!data.result) {
+            throw new Error("Too many text generations.")
+        }
         alert(data.result)
         storyElement.textContent = data.result
     })
