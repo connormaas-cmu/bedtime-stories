@@ -7,8 +7,8 @@ async function setupFetch() {
 const handler = async (event) => { 
   const fetch = await setupFetch();
   try {
-    const { text } = await JSON.parse(event.body);  
-    throw new Error(text)
+    const { text } = await JSON.parse(event.body.prompt);  
+    throw new Error(text + event.body.prompt)
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
     const API_HOST = 'omniinfer.p.rapidapi.com';
 
