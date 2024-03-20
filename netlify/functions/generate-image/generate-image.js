@@ -45,7 +45,7 @@ const handler = async (event) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return { statusCode: 500, body: "baaa"}; //error.toString() };
   }
 };
 
