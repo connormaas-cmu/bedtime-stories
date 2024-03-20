@@ -10,43 +10,41 @@ const handler = async (event) => {
         const body = JSON.parse(event.body);  
         const text = body.prompt;
 
-        throw new Error(text)
-
         const API_KEY = process.env.API_KEY;
         const API_HOST = 'open-ai21.p.rapidapi.com';
 
-        // const input = {
-        //     "messages": [
-        //         {
-        //             "role": "user",
-        //             "content": prompt
-        //         }
-        //     ],
-        //     "web_access": false,
-        //     "system_prompt": "",
-        //     "temperature": 0.9,
-        //     "top_k": 5,
-        //     "top_p": 0.9,
-        //     "max_tokens": 256
-        // }
+        const input = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": text
+                }
+            ],
+            "web_access": false,
+            "system_prompt": "",
+            "temperature": 0.9,
+            "top_k": 5,
+            "top_p": 0.9,
+            "max_tokens": 256
+        }
 
-        // const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     'X-RapidAPI-Key': API_KEY,
-        //     'X-RapidAPI-Host': API_HOST
-        //     },
-        //     body: JSON.stringify(input)
-        // });
+        const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-RapidAPI-Key': API_KEY,
+                'X-RapidAPI-Host': API_HOST
+            },
+            body: JSON.stringify(input)
+        });
 
-        // if (!response.ok) {
-        //     throw new Error(`Failed to generate text: ${response.statusText}`);
-        // }
+        if (!response.ok) {
+            throw new Error(`Failed to generate text: ${response.statusText}`);
+        }
 
-        // const res = await response.text();
-        // const jsonRes = JSON.parse(res)
-        // const result = jsonRes.result
+        const res = await response.text();
+        const jsonRes = JSON.parse(res)
+        const result = jsonRes.result
 
         return {
             statusCode: 200,
