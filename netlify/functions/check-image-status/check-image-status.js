@@ -22,8 +22,8 @@ const handler = async (event) => {
       throw new Error(`Failed to check status: ${imageResponse.statusText}`);
     }
 
-    const textResponse = await response.text()
-    const data = JSON.parse(textResponse);
+    const response = await imageResponse.text()
+    const data = JSON.parse(response);
     const images = data.imgs
 
     throw new Error(images)
