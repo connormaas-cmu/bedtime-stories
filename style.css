@@ -12,3 +12,13 @@ body, html {
 input, button {
     margin: 10px;
 }
+
+#image {
+    max-width: calc(80vw - 20%);
+    max-height: calc(80vw - 20%);
+    width: auto;
+    height: auto;
+    margin: 10vh auto; /* Adjust margin to vertically center the image */
+    max-width: 750px; /* Set maximum width to 750px */
+    max-height: 750px; /* Set maximum height to 750px */
+}

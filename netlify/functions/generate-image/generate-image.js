@@ -19,8 +19,8 @@ const handler = async (event) => {
       "steps": 20,
       "cfg_scale": 7,
       "seed": -1,
-      "height": 1024,
-      "width": 768,
+      "height": 750,
+      "width": 750,
       "model_name": "meinamix_meinaV9.safetensors",
       "prompt": text
     }
