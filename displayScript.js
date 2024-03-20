@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 } else {
                     setTimeout(checkStatus, 2000);
                 }
+            })
+            .catch(error => {
+                alert(error);
             });
         };
         checkStatus();
