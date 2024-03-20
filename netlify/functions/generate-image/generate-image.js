@@ -9,7 +9,7 @@ const handler = async (event) => {
   try {
     const body = JSON.parse(event.body);  
     const text = body.prompt;
-    const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
+    const API_KEY = process.env.IMAGE_API_KEY;
     const API_HOST = 'omniinfer.p.rapidapi.com';
     const input = {
       "negative_prompt": "nsfw, watermark, facial distortion, lip deformity, redundant background, extra fingers, Abnormal eyesight, ((multiple faces)), ((Tongue protruding)), ((extra arm)), extra hands, extra fingers, deformity, missing legs, missing toes, missin hand, missin fingers, (painting by bad-artist-anime:0.9), (painting by bad-artist:0.9), watermark, text, error, blurry, jpeg artifacts, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, artist name, (worst quality, low quality:1.4), bad anatomy",
