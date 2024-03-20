@@ -1,10 +1,11 @@
-const fetch = await (async () => {
+async function setupFetch() {
   const module = await import('node-fetch');
   return module.default;
-})();
+}
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => { 
+  const fetch = await setupFetch();
   try {
     const { text } = JSON.parse(event.body); 
     const API_KEY = '3ec93807f6msh31ed4d7d260d5d3p175ee1jsn3ce1ecb6e9a2';
