@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .then(response => response.json())
     .then(data => {
-        const { task_id } = JSON.parse(data.body);  
+        const { task_id } = data;
         alert(task_id)
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${task_id}`)
