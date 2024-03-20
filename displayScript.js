@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
     })
-    .then(response => response.json())
+    .then(response => alert(response.text()))
     .then(data => {
         alert(JSON.stringify(data))
         const { task_id } = data;

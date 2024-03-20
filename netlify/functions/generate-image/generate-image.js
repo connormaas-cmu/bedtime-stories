@@ -26,17 +26,8 @@ const handler = async (event) => {
       throw new Error(`Failed to generate image: ${response.statusText}`);
     }
 
+    const task_id = await response.text();
 
-
-    const responseText = await response.text();
-
-    throw new Error(responseText);
-
-    const data = JSON.parse(responseText);
-    const { task_id } = data;
-
-
-    
     return {
       statusCode: 200,
       body: JSON.stringify({ task_id })
