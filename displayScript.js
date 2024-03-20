@@ -9,8 +9,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => response.text())
+    .then(textResponse => {
+        const data = JSON.parse(textResponse);
+        alert(data)
+        alert(date.text())
         storyElement.textContent = data.story;
         alert(data.story)
     })
