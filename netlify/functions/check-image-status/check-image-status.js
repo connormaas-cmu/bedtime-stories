@@ -23,6 +23,9 @@ const handler = async (event) => {
     }
 
     const response = await imageResponse.text()
+
+    throw new Error(response)
+
     const data = JSON.parse(response);
     const images = data.imgs
 
