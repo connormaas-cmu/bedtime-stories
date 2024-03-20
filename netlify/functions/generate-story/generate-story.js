@@ -12,7 +12,7 @@ const handler = async (event) => {
         const API_KEY = process.env.API_KEY;
         const API_HOST = 'open-ai21.p.rapidapi.com';
 
-        input = {
+        const input = {
             "messages": [
                 {
                     "role": "user",
@@ -28,13 +28,13 @@ const handler = async (event) => {
         }
 
         const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             'X-RapidAPI-Key': API_KEY,
             'X-RapidAPI-Host': API_HOST
-        },
-        body: JSON.stringify(input)
+            },
+            body: JSON.stringify(input)
         });
 
         if (!response.ok) {
