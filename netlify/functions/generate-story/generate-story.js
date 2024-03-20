@@ -26,7 +26,7 @@ const handler = async (event) => {
             "temperature": 0.9,
             "top_k": 5,
             "top_p": 0.9,
-            "max_tokens": 200
+            "max_tokens": 1000
         }
 
         const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
