@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .then(response => response.json())
     .then(data => {
-        alert(json.stringify(data))
+        alert(JSON.stringify(data))
         const { task_id } = data;
         alert(task_id)
         const checkStatus = () => {
