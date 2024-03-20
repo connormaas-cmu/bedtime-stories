@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const innerData = JSON.parse(data.task_id);
         const taskId = innerData.data.task_id; 
         const checkStatus = (startTime) => {
-            if (new Date() - startTime > 300000) {
+            if (new Date() - startTime > 20000) {
                 alert("Timeout: Image generation took too long.");
                 return;
             }
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     }
                 })
                 .catch(error => {
-                    alert("Error checking status: " + error);
+                    console.log(error)
                 });
         };
 
