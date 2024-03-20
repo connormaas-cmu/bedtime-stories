@@ -12,12 +12,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .then(response => response.text())
     .then(textResponse => {
-        alert(textResponse);  // Now textResponse contains the actual text
-        const data = JSON.parse(textResponse);  // Parse text response to JSON
-        alert(data)
-        alert(JSON.stringify(data));  // Show the data object
-        const { task_id } = data;
-        alert(task_id);  // Show the task_id
+        const data = JSON.parse(textResponse);
+        const innerData = JSON.parse(data.task_id);
+        const actualTaskId = innerData.data.task_id; 
+        alert(actualTaskId);
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${task_id}`)
             .then(response => response.json())
