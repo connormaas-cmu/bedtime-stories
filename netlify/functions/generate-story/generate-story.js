@@ -1,8 +1,3 @@
-async function setupFetch() {
-  const module = await import('node-fetch');
-  return module.default;
-}
-
 async function openaiSetup() {
     const module = await import('openai')
     return new OpenAI({ apiKey: process.env.TEXT_API_KEY });
@@ -10,25 +5,26 @@ async function openaiSetup() {
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-  const fetch = await setupFetch();
-  const openai = openaiSetup()
+    const openai = openaiSetup()
 
-  try {
-      const { prompt } = JSON.parse(event.body);
-      const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt }],
-      });
+    try {
+        throw new Error(JSON.parse(event.body))
+        const { prompt } = JSON.parse(event.body);
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: prompt }],
+        });
   
-      const story = response.data.choices[0].message.content;
+        const story = response.data.choices[0].message.content;
 
-      return {
-          statusCode: 200,
-          body: JSON.stringify({ story }),
-      };
-  } catch (error) {
-      return { statusCode: 500, body: error.toString() };
-  }
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ story }),
+        };
+
+    } catch (error) {
+        return { statusCode: 500, body: error.toString() };
+    }
 };
 
 module.exports = { handler }
