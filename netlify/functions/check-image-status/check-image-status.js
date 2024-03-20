@@ -22,9 +22,10 @@ const handler = async (event) => {
       throw new Error(`Failed to check status: ${imageResponse.statusText}`);
     }
 
-    const { data } = await imageResponse.json();
+    const res = await imageResponse.json();
+    const d = res.data
 
-    throw new Error(data)
+    throw new Error(d)
     const images = data.imgs
 
     if (images.length() > 0) {
