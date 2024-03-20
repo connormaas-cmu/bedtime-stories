@@ -10,11 +10,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
     })
-    .then(response => alert(response.text()))
-    .then(data => {
-        alert(JSON.stringify(data))
+    .then(response => response.text())
+    .then(textResponse => {
+        alert(textResponse);  // Now textResponse contains the actual text
+        const data = JSON.parse(textResponse);  // Parse text response to JSON
+        alert(data)
+        alert(JSON.stringify(data));  // Show the data object
         const { task_id } = data;
-        alert(task_id)
+        alert(task_id);  // Show the task_id
         const checkStatus = () => {
             fetch(`/.netlify/functions/check-image-status?task_id=${task_id}`)
             .then(response => response.json())
