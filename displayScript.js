@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const imageElement = document.getElementById('image');
 
     // Replace 'your_netlify_function_endpoint' with your actual Netlify function URL
-    const response = await fetch('your_netlify_function_endpoint', {
+    const response = await fetch('https://bed-time-stories.netlify.app/netlify/functions/generate-image/generate-image.js', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
