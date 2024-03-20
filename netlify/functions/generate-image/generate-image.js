@@ -1,7 +1,7 @@
-let fetch;
-import('node-fetch').then(module => {
-  fetch = module.default;
-});
+const fetch = await (async () => {
+  const module = await import('node-fetch');
+  return module.default;
+})();
 
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
