@@ -23,7 +23,7 @@ const handler = async (event) => {
               }
           ],
           "web_access": false,
-          "system_prompt": 'Do not use the word "As" to start your response.',
+          "system_prompt": 'Start your response with a noun.',
           "temperature": 0.9,
           "top_k": 5,
           "top_p": 0.9,
