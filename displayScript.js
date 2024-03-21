@@ -15,10 +15,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     const audioElement6 = document.getElementById('audio6');
 
     function loadAudio() {
-        audioElement1.load()
+        const sourceElement = audioElement1.querySelector('source');
+        if (sourceElement.src == "") {
+            audioElement1.load()
+        }
     }
     
-    setInterval(loadAudio, 5000);
+    setInterval(loadAudio, 10000);
 
     // generate image
     // fetch('/.netlify/functions/generate-image', {
