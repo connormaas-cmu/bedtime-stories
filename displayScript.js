@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         storyElement.textContent = data.result
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate story." + error;
+        storyElement.textContent = "Failed to generate story. " + error;
     });
 
     // generate image
