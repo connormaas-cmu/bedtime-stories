@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 storyElement6.textContent = newData.result
                 
                 setTimeout(() => {
-                    fetch('/.netlify/functions/texttospeech', {
+                    fetch('/.netlify/functions/generate-audio', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ text: newData.result }),
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement2.textContent = newData.result
                     
                     setTimeout(() => {
-                        fetch('/.netlify/functions/texttospeech', {
+                        fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: newData.result }),
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement3.textContent = newData.result
                     
                     setTimeout(() => {
-                        fetch('/.netlify/functions/texttospeech', {
+                        fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: newData.result }),
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement4.textContent = newData.result
 
                     setTimeout(() => {
-                        fetch('/.netlify/functions/texttospeech', {
+                        fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: newData.result }),
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement5.textContent = newData.result
 
                     setTimeout(() => {
-                        fetch('/.netlify/functions/texttospeech', {
+                        fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ text: newData.result }),
