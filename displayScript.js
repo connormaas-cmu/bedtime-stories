@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             })
             .then(response => response.text())
             .then(textResponse => {
-                alert(textResponse)
                 const audioData = JSON.parse(textResponse)
                 audioElement1.src = audioData.url
+                alert(textResponse)
                 audioElement1.load()
             })
         }, 2000)
