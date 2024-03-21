@@ -73,9 +73,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(response => response.text())
             .then(textResponse => {
                 const audioData = JSON.parse(textResponse)
-                audioElement1.src = audioData.url
-                alert(audioData.url)
-                audioElement1.load()
+                // audioElement1.src = audioData.url
+                // audioElement1.load()
+                const sourceElement = audioElement1.querySelector('source');
+                sourceElement.src = audioData.url;
+                audioElement1.load();
             })
         }, 2000)
 
