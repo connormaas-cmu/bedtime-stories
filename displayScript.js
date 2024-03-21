@@ -216,7 +216,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         continueGeneration(0, data.result)
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate story." + error;
+        alert(error)
+        console.log(error);
     }); 
 
 });
