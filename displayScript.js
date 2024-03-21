@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = JSON.parse(textResponse);
         storyElement1.textContent = data.result
 
-        fetch('/.netlify/functions/texttospeech', {
+        fetch('/.netlify/functions/generate-audio', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: data.result }),
