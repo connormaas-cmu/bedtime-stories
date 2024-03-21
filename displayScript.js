@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         fetch('/.netlify/functions/texttospeech', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: newData.result }),
+            body: JSON.stringify({ text: data.result }),
         })
         .then(response => response.text())
         .then(textResponse => {
