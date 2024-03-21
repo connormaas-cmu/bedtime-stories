@@ -53,6 +53,25 @@ document.addEventListener('DOMContentLoaded', async function() {
     //     storyElement.textContent = "Failed to generate image." + error;
     // });
 
+    function checkAndLoadAudio(audioUrl, audioElement) {
+        let checkAudio = new Audio();
+        checkAudio.addEventListener('canplay', function() {
+            const sourceElement = audioElement.querySelector('source');
+            sourceElement.src = audioUrl;
+            audioElement.load(); 
+            console.log("Audio is now ready and loaded:", audioUrl);
+        }, false);
+    
+        checkAudio.addEventListener('error', function() {
+            console.log("Audio not ready, retrying in 2 seconds:", audioUrl);
+            setTimeout(() => checkAndLoadAudio(audioUrl, audioElement), 2000); 
+        }, false);
+    
+        checkAudio.src = audioUrl;
+        checkAudio.load(); 
+    }
+    
+
     // generate story
     fetch('/.netlify/functions/generate-story', {
         method: 'POST',
@@ -75,9 +94,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const audioData = JSON.parse(textResponse)
                 // audioElement1.src = audioData.url
                 // audioElement1.load()
-                const sourceElement = audioElement1.querySelector('source');
-                sourceElement.src = audioData.url;
-                audioElement1.load();
+                // const sourceElement = audioElement1.querySelector('source');
+                checkAndLoadAudio(audioData.url, audioElement1);
+                // sourceElement.src = audioData.url;
+                // audioElement1.load();
             })
         }, 2000)
 
