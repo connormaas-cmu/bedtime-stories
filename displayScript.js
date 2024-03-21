@@ -15,22 +15,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     const audioElement6 = document.getElementById('audio6');
 
     function loadAudio() {
-        if (audioElement1.paused) {
+        if (audioElement1.paused && audioElement2.paused && audioElement3.paused && audioElement4.paused && audioElement5.paused && audioElement6.paused) {
             audioElement1.load()
-        }
-        if (audioElement2.paused) {
             audioElement2.load()
-        }
-        if (audioElement3.paused) {
             audioElement3.load()
-        }
-        if (audioElement4.paused) {
             audioElement4.load()
-        }
-        if (audioElement5.paused) {
             audioElement5.load()
-        }
-        if (audioElement6.paused) {
             audioElement6.load()
         }
     }
