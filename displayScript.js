@@ -38,43 +38,43 @@ document.addEventListener('DOMContentLoaded', async function() {
     setInterval(loadAudio, 10000);
 
     // generate image
-    // fetch('/.netlify/functions/generate-image', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ prompt: userInput }),
-    // })
-    // .then(response => response.text())
-    // .then(textResponse => {
-    //     const data = JSON.parse(textResponse);
-    //     const innerData = JSON.parse(data.task_id);
-    //     const taskId = innerData.data.task_id; 
-    //     const checkStatus = (startTime) => {
-    //         if (new Date() - startTime > 20000) {
-    //             alert("Timeout: Image generation took too long.");
-    //             return;
-    //         }
+    fetch('/.netlify/functions/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: userInput }),
+    })
+    .then(response => response.text())
+    .then(textResponse => {
+        const data = JSON.parse(textResponse);
+        const innerData = JSON.parse(data.task_id);
+        const taskId = innerData.data.task_id; 
+        const checkStatus = (startTime) => {
+            if (new Date() - startTime > 20000) {
+                alert("Timeout: Image generation took too long.");
+                return;
+            }
         
-    //         fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
-    //             .then(response => response.text())
-    //             .then(textContent => {
-    //                 if (textContent.includes("Image is still being processed.")) {
-    //                     setTimeout(() => checkStatus(startTime), 2000);
-    //                 } else {
-    //                     const data = JSON.parse(textContent);
-    //                     imageElement.src = data.image;
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 console.log(error)
-    //             });
-    //     };
+            fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
+                .then(response => response.text())
+                .then(textContent => {
+                    if (textContent.includes("Image is still being processed.")) {
+                        setTimeout(() => checkStatus(startTime), 2000);
+                    } else {
+                        const data = JSON.parse(textContent);
+                        imageElement.src = data.image;
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        };
 
-    //     checkStatus(new Date());
+        checkStatus(new Date());
 
-    // })
-    // .catch(error => {
-    //     storyElement.textContent = "Failed to generate image." + error;
-    // });
+    })
+    .catch(error => {
+        storyElement.textContent = "Failed to generate image." + error;
+    });
 
     // generate story
     fetch('/.netlify/functions/generate-story', {
