@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             })
             .then(response => response.text())
             .then(textResponse => {
+                alert(textResponse)
                 const newData = JSON.parse(textResponse);
-                alert(newData)
                 alert(newData.url)
                 audioElement.src = newData.url
                 audioElement.load();
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         function continueGeneration(count, text) {
-            if (count >= 4) { // repeat 4 times
+            if (count >= 1) { // repeat 4 times
                 finishGeneration(text)
                 return; 
             }
