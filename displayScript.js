@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 finishGeneration(text)
                 return; 
             }
-            else if (count >= 0) {
+            else if (count == 0) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 })
     
             }
-            else if (count >= 1) {
+            else if (count == 1) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
             }
-            else if (count >= 2) {
+            else if (count == 2) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
