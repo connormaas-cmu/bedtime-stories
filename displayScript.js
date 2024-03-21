@@ -12,14 +12,38 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.text())
     .then(textResponse => {
         const data = JSON.parse(textResponse);
+        
         if (!data.result) {
             throw new Error("Too many text generations.")
         }
-        alert(data.result)
+       
         storyElement.textContent = data.result
+
+        function continueGeneration(count, text) {
+            if (count >= 8) return;
+
+            fetch('/.netlify/functions/continue-generation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: userInput, text: text }),
+            })
+            .then(response => response.text())
+            .then(textResponse => {
+                const newData = JSON.parse(textResponse);
+    
+                if (!newData.result) {
+                    throw new Error("Too many text generations in continuation.");
+                }
+        
+                storyElement.textContent = text + newData.result
+                continueGeneration(count + 1, text + newData.result)
+            })
+        }
+        continueGeneration(0, data.result)
+
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate story. " + error;
+        storyElement.textContent = "Failed to generate story." + error;
     });
 
     // generate image
