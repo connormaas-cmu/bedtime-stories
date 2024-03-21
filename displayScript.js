@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         })
                         .then(response => response.text())
                         .then(textResponse => {
+                            alert(textResponse)
                             const newAudioData = JSON.parse(textResponse)
                             const sourceElement = audioElement3.querySelector('source');
                             sourceElement.src = newAudioData.url;
