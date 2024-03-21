@@ -219,3 +219,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     }); 
 
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const audios = document.querySelectorAll('audio');
+    audios.forEach(audio => {
+        const source = audio.querySelector('source');
+        if (!source.src) {
+            audio.parentElement.style.display = 'none';
+        }
+    });
+});
