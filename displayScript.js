@@ -221,11 +221,31 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const audios = document.querySelectorAll('audio');
-    audios.forEach(audio => {
-        const source = audio.querySelector('source');
-        if (!source.src) {
-            audio.parentElement.style.display = 'none';
+    const containers = document.querySelectorAll('.container');
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                const source = mutation.target;
+                const audio = source.parentElement;
+                if (source.getAttribute('src')) {
+                    audio.parentElement.style.display = '';
+                } else {
+                    audio.parentElement.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    containers.forEach(container => {
+        const source = container.querySelector('source');
+        if (source) {
+            // Initially hide audio elements with empty src
+            if (!source.getAttribute('src')) {
+                container.style.display = 'none';
+            }
+            // Observe changes to the src attribute
+            observer.observe(source, { attributes: true });
         }
     });
 });
