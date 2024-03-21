@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 finishGeneration(text)
                 return; 
             }
-            if (count >= 0) {
+            else if (count >= 0) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -128,12 +128,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement2.src = newAudioData.url
                         audioElement2.load()
                     })
-
-                    continueGeneration(count + 1, newData.result)
                 })
     
             }
-            if (count >= 1) {
+            else if (count >= 1) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -155,11 +153,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement3.src = newAudioData.url
                         audioElement3.load()
                     })
-
-                    continueGeneration(count + 1, newData.result)
                 })
             }
-            if (count >= 2) {
+            else if (count >= 2) {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -181,12 +177,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement4.src = newAudioData.url
                         audioElement4.load()
                     })
-
-                    continueGeneration(count + 1, newData.result)
                 })
 
             }
-            if (count >= 3) {
+            else {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -208,10 +202,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement5.src = newAudioData.url
                         audioElement5.load()
                     })
-
-                    continueGeneration(count + 1, newData.result)
                 })
             }
+            continueGeneration(count + 1, text + " " + newData.result)
         }
         continueGeneration(0, data.result)
     })
