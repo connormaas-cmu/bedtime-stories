@@ -10,7 +10,7 @@ const handler = async (event) => {
       const body = JSON.parse(event.body);  
       const prom = body.prompt;
       const text = body.text;
-      const prompt = "We are creating an educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that add to the end story (continue from where it left off but do not start with 'as'), but leave room for more story to be told"
+      const prompt = "We are creating an educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that continue the story from where it left off, but leave room for more story to be told."
 
       const API_KEY = process.env.API_KEY;
       const API_HOST = 'open-ai21.p.rapidapi.com';
