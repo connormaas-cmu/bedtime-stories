@@ -7,22 +7,32 @@ document.addEventListener('DOMContentLoaded', async function() {
     const audioElement2 = document.getElementById('audio2');
     const storyElement3 = document.getElementById('story3');
     const audioElement3 = document.getElementById('audio3');
-    const storyElement4 = document.getElementById('story4');
-    const audioElement4 = document.getElementById('audio4');
-    const storyElement5 = document.getElementById('story5');
-    const audioElement5 = document.getElementById('audio5');
+    // const storyElement4 = document.getElementById('story4');
+    // const audioElement4 = document.getElementById('audio4');
+    // const storyElement5 = document.getElementById('story5');
+    // const audioElement5 = document.getElementById('audio5');
     const storyElement6 = document.getElementById('story6');
     const audioElement6 = document.getElementById('audio6');
 
     function loadAudio() {
-        if (audioElement1.paused && audioElement2.paused && audioElement3.paused && audioElement4.paused && audioElement5.paused && audioElement6.paused) {
+        if (audioElement1.paused) {
             audioElement1.load()
+        } 
+        if (audioElement2.paused) {
             audioElement2.load()
+        } 
+        if (audioElement3.paused) {
             audioElement3.load()
-            audioElement4.load()
-            audioElement5.load()
+        } 
+        // if (audioElement4.paused) {
+        //     audioElement4.load()
+        // } 
+        // if (audioElement5.paused) {
+        //     audioElement5.load()
+        // } 
+        if (audioElement6.paused) {
             audioElement6.load()
-        }
+        } 
     }
     
     setInterval(loadAudio, 10000);
@@ -78,10 +88,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         storyElement1.textContent = data.result
 
         setTimeout(() => {
+            const rawText = data.result
+            const modText = rawText.replace(/[.!?]/g, ",");
             fetch('/.netlify/functions/generate-audio', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: data.result }),
+                body: JSON.stringify({ text: modText }),
             })
             .then(response => response.text())
             .then(textResponse => {
@@ -103,10 +115,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                 storyElement6.textContent = newData.result
                 
                 setTimeout(() => {
+                    const newRawText = newData.result
+                    const newModText = newRawText.replace(/[.!?]/g, ",");
                     fetch('/.netlify/functions/generate-audio', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: newData.result }),
+                        body: JSON.stringify({ text: newModText }),
                     })
                     .then(response => response.text())
                     .then(textResponse => {
@@ -119,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         function continueGeneration(count, text) {
-            if (count >= 4) { // repeat 4 times
+            if (count >= 2) { // repeat 2 times
                 finishGeneration(text)
                 return; 
             }
@@ -135,10 +149,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement2.textContent = newData.result
                     
                     setTimeout(() => {
+                        const newRawText = newData.result
+                        const newModText = newRawText.replace(/[.!?]/g, ",");
                         fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: newData.result }),
+                            body: JSON.stringify({ text: newModText }),
                         })
                         .then(response => response.text())
                         .then(textResponse => {
@@ -152,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 })
     
             }
-            else if (count == 1) {
+            else {
                 fetch('/.netlify/functions/continue-generation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -164,14 +180,15 @@ document.addEventListener('DOMContentLoaded', async function() {
                     storyElement3.textContent = newData.result
                     
                     setTimeout(() => {
+                        const newRawText = newData.result
+                        const newModText = newRawText.replace(/[.!?]/g, ",");
                         fetch('/.netlify/functions/generate-audio', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: newData.result }),
+                            body: JSON.stringify({ text: newModText }),
                         })
                         .then(response => response.text())
                         .then(textResponse => {
-                            alert(textResponse)
                             const newAudioData = JSON.parse(textResponse)
                             const sourceElement = audioElement3.querySelector('source');
                             sourceElement.src = newAudioData.url;
@@ -181,63 +198,68 @@ document.addEventListener('DOMContentLoaded', async function() {
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
             }
-            else if (count == 2) {
-                fetch('/.netlify/functions/continue-generation', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: userInput, text: text }),
-                })
-                .then(response => response.text())
-                .then(textResponse => {
-                    const newData = JSON.parse(textResponse);
-                    storyElement4.textContent = newData.result
+            
+            // else if (count == 2) {
+            //     fetch('/.netlify/functions/continue-generation', {
+            //         method: 'POST',
+            //         headers: { 'Content-Type': 'application/json' },
+            //         body: JSON.stringify({ prompt: userInput, text: text }),
+            //     })
+            //     .then(response => response.text())
+            //     .then(textResponse => {
+            //         const newData = JSON.parse(textResponse);
+            //         storyElement4.textContent = newData.result
 
-                    setTimeout(() => {
-                        fetch('/.netlify/functions/generate-audio', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: newData.result }),
-                        })
-                        .then(response => response.text())
-                        .then(textResponse => {
-                            const newAudioData = JSON.parse(textResponse)
-                            const sourceElement = audioElement4.querySelector('source');
-                            sourceElement.src = newAudioData.url;
-                        })
-                    }, 2000)
+            //         setTimeout(() => {
+            //             const newRawText = newData.result
+            //             const newModText = newRawText.replace(/[.!?]/g, ",");
+            //             fetch('/.netlify/functions/generate-audio', {
+            //                 method: 'POST',
+            //                 headers: { 'Content-Type': 'application/json' },
+            //                 body: JSON.stringify({ text: newModText }),
+            //             })
+            //             .then(response => response.text())
+            //             .then(textResponse => {
+            //                 const newAudioData = JSON.parse(textResponse)
+            //                 const sourceElement = audioElement4.querySelector('source');
+            //                 sourceElement.src = newAudioData.url;
+            //             })
+            //         }, 2000)
 
-                    continueGeneration(count + 1, text + " " + newData.result)
-                })
+            //         continueGeneration(count + 1, text + " " + newData.result)
+            //     })
 
-            }
-            else {
-                fetch('/.netlify/functions/continue-generation', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: userInput, text: text }),
-                })
-                .then(response => response.text())
-                .then(textResponse => {
-                    const newData = JSON.parse(textResponse);
-                    storyElement5.textContent = newData.result
+            // }
+            // else {
+            //     fetch('/.netlify/functions/continue-generation', {
+            //         method: 'POST',
+            //         headers: { 'Content-Type': 'application/json' },
+            //         body: JSON.stringify({ prompt: userInput, text: text }),
+            //     })
+            //     .then(response => response.text())
+            //     .then(textResponse => {
+            //         const newData = JSON.parse(textResponse);
+            //         storyElement5.textContent = newData.result
 
-                    setTimeout(() => {
-                        fetch('/.netlify/functions/generate-audio', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ text: newData.result }),
-                        })
-                        .then(response => response.text())
-                        .then(textResponse => {
-                            const newAudioData = JSON.parse(textResponse)
-                            const sourceElement = audioElement5.querySelector('source');
-                            sourceElement.src = newAudioData.url;
-                        })
-                    }, 2000)
+            //         setTimeout(() => {
+            //             const newRawText = newData.result
+            //             const newModText = newRawText.replace(/[.!?]/g, ",");
+            //             fetch('/.netlify/functions/generate-audio', {
+            //                 method: 'POST',
+            //                 headers: { 'Content-Type': 'application/json' },
+            //                 body: JSON.stringify({ text: newModText }),
+            //             })
+            //             .then(response => response.text())
+            //             .then(textResponse => {
+            //                 const newAudioData = JSON.parse(textResponse)
+            //                 const sourceElement = audioElement5.querySelector('source');
+            //                 sourceElement.src = newAudioData.url;
+            //             })
+            //         }, 2000)
 
-                    continueGeneration(count + 1, text + " " + newData.result)
-                })
-            }
+            //         continueGeneration(count + 1, text + " " + newData.result)
+            //     })
+            // }
         }
         continueGeneration(0, data.result)
     })
