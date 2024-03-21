@@ -12,15 +12,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(response => response.text())
     .then(textResponse => {
         const data = JSON.parse(textResponse);
-        
-        if (!data.result) {
-            throw new Error("Too many text generations.")
-        }
-       
         storyElement.textContent = data.result
 
+        function finishGeneration(text) {
+            fetch('/.netlify/functions/finish-generation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: userInput, text: text }),
+            })
+            .then(response => response.text())
+            .then(textResponse => {
+                const newData = JSON.parse(textResponse);
+                storyElement.textContent = text + "\n" + newData.result
+            })
+        }
+
         function continueGeneration(count, text) {
-            if (count >= 8) return;
+            if (count >= 2) { // repeat 8 times
+                finishGeneration(text)
+                return; 
+            }
 
             fetch('/.netlify/functions/continue-generation', {
                 method: 'POST',
@@ -30,17 +41,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(response => response.text())
             .then(textResponse => {
                 const newData = JSON.parse(textResponse);
-    
-                if (!newData.result) {
-                    throw new Error("Too many text generations in continuation.");
-                }
-        
-                storyElement.textContent = text + newData.result
-                continueGeneration(count + 1, text + newData.result)
+                storyElement.textContent = text + "\n" + newData.result
+                continueGeneration(count + 1, text + "\n" + newData.result)
             })
         }
         continueGeneration(0, data.result)
-
     })
     .catch(error => {
         storyElement.textContent = "Failed to generate story." + error;
