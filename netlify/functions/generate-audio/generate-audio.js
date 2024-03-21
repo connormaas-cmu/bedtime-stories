@@ -27,10 +27,6 @@ const handler = async (event) => {
           body: JSON.stringify(input)
       });
 
-      if (!response.ok) {
-          throw new Error(`Failed to generate text: ${response.statusText}`);
-      }
-
       const res = await response.text();
       const jsonRes = JSON.parse(res)
 
