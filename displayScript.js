@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         function continueGeneration(count, text) {
-            if (count >= 1) { // repeat 4 times
+            if (count >= 4) { // repeat 4 times
                 finishGeneration(text)
                 return; 
             }
