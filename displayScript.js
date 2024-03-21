@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(textResponse => {
                 const newData = JSON.parse(textResponse);
                 audioElement.src = newData.url
+                alert(newData.url)
                 audioElement.load();
             })      
         }
@@ -105,5 +106,5 @@ document.addEventListener('DOMContentLoaded', async function() {
     .catch(error => {
         storyElement.textContent = "Failed to generate story." + error;
     }); 
-    
+
 });

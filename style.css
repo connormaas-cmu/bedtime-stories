@@ -16,6 +16,6 @@ input, button {
 #image {
     width: 80%;
     aspect-ratio : 1 / 1;
-    max-width: 750px;
-    max-height: 750px;
+    max-width: 5000px;
+    max-height: 500px;
 }
