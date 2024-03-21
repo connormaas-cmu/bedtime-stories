@@ -33,11 +33,10 @@ const handler = async (event) => {
 
       const res = await response.text();
       const jsonRes = JSON.parse(res)
-      const result = jsonRes.url
 
       return {
           statusCode: 200,
-          body: JSON.stringify({ result })
+          body: JSON.stringify( jsonRes )
       };
 
   } catch (error) {
