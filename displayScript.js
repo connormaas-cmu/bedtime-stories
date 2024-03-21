@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
                     storyElement2.textContent = newData.result
+                    
                     fetch('/.netlify/functions/texttospeech', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -128,6 +129,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement2.src = newAudioData.url
                         audioElement2.load()
                     })
+
+                    continueGeneration(count + 1, text + " " + newData.result)
                 })
     
             }
@@ -153,6 +156,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement3.src = newAudioData.url
                         audioElement3.load()
                     })
+
+                    continueGeneration(count + 1, text + " " + newData.result)
                 })
             }
             else if (count >= 2) {
@@ -177,6 +182,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement4.src = newAudioData.url
                         audioElement4.load()
                     })
+
+                    continueGeneration(count + 1, text + " " + newData.result)
                 })
 
             }
@@ -202,9 +209,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement5.src = newAudioData.url
                         audioElement5.load()
                     })
+
+                    continueGeneration(count + 1, text + " " + newData.result)
                 })
             }
-            continueGeneration(count + 1, text + " " + newData.result)
         }
         continueGeneration(0, data.result)
     })
