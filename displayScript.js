@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement4.load()
                     })
 
-                    continueGeneration(count + 1, text + " " + newData.result)
+                    continueGeneration(count + 1, newData.result)
                 })
 
             }
