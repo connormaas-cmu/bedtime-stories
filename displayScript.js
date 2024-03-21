@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(response => response.text())
             .then(textResponse => {
                 const newData = JSON.parse(textResponse);
-                storyElement6.textContent = text + " " + newData.result
+                storyElement6.textContent = newData.result
                 
                 fetch('/.netlify/functions/texttospeech', {
                     method: 'POST',
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
-                    storyElement2.textContent = text + " " + newData.result
+                    storyElement2.textContent = newData.result
                     fetch('/.netlify/functions/texttospeech', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
