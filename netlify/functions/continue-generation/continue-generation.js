@@ -10,7 +10,7 @@ const handler = async (event) => {
       const body = JSON.parse(event.body);  
       const prom = body.prompt;
       const text = body.text;
-      const prompt = "We are creating a subtly educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that add to the end story (continue from where it left off), but leave room for more story to be told. Make it as educational ass possible. Don't start your sentence with 'as.' and don't repeat previous transitions."
+      const prompt = "We are creating a subtly educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that add to the end story (continue from where it left off), but leave room for more story to be told. Make it as educational ass possible. Include a diverse, different transition from the preivously used ones."
 
       const API_KEY = process.env.API_KEY;
       const API_HOST = 'open-ai21.p.rapidapi.com';
