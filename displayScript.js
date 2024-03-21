@@ -63,19 +63,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(textResponse => {
         const data = JSON.parse(textResponse);
         storyElement1.textContent = data.result
-        
-        fetch('/.netlify/functions/generate-audio', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: data.result }),
-        })
-        .then(response => response.text())
-        .then(textResponse => {
-            alert(textResponse)
-            const audioData = JSON.parse(textResponse)
-            audioElement1.src = audioData.url
-            audioElement1.load()
-        })
+
+        setTimeout(() => {
+            fetch('/.netlify/functions/generate-audio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: data.result }),
+            })
+            .then(response => response.text())
+            .then(textResponse => {
+                alert(textResponse)
+                const audioData = JSON.parse(textResponse)
+                audioElement1.src = audioData.url
+                audioElement1.load()
+            })
+        }, 2000)
 
         function finishGeneration(text) {
             fetch('/.netlify/functions/finish-generation', {
