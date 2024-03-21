@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement2.load()
                     })
 
-                    continueGeneration(count + 1, text + " " + newData.result)
+                    continueGeneration(count + 1, newData.result)
                 })
     
             }
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
-                    storyElement3.textContent = text + " " + newData.result
+                    storyElement3.textContent = newData.result
                     
                     fetch('/.netlify/functions/texttospeech', {
                         method: 'POST',
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement3.load()
                     })
 
-                    continueGeneration(count + 1, text + " " + newData.result)
+                    continueGeneration(count + 1, newData.result)
                 })
             }
             if (count >= 2) {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
-                    storyElement4.textContent = text + " " + newData.result
+                    storyElement4.textContent = newData.result
 
                     fetch('/.netlify/functions/texttospeech', {
                         method: 'POST',
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
-                    storyElement5.textContent = text + " " + newData.result
+                    storyElement5.textContent = newData.result
 
                     fetch('/.netlify/functions/texttospeech', {
                         method: 'POST',
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         audioElement5.load()
                     })
 
-                    continueGeneration(count + 1, text + " " + newData.result)
+                    continueGeneration(count + 1, newData.result)
                 })
             }
         }
