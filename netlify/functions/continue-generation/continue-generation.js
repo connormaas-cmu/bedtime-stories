@@ -10,7 +10,7 @@ const handler = async (event) => {
       const body = JSON.parse(event.body);  
       const prom = body.prompt;
       const text = body.text;
-      const prompt = "Do not use the word 'As'. We are creating an educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that continue the story from where it left off, but leave room for more story to be told."
+      const prompt = "We are creating an educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that continue the story from where it left off, but leave room for more story to be told."
 
       const API_KEY = process.env.API_KEY;
       const API_HOST = 'open-ai21.p.rapidapi.com';
@@ -23,7 +23,7 @@ const handler = async (event) => {
               }
           ],
           "web_access": false,
-          "system_prompt": '',
+          "system_prompt": 'Do not use the word "As" to start your response.',
           "temperature": 0.9,
           "top_k": 5,
           "top_p": 0.9,
