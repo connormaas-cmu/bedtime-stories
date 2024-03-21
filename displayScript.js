@@ -112,17 +112,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const newData = JSON.parse(textResponse);
                 storyElement6.textContent = newData.result
                 
-                fetch('/.netlify/functions/texttospeech', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: newData.result }),
-                })
-                .then(response => response.text())
-                .then(textResponse => {
-                    const newAudioData = JSON.parse(textResponse)
-                    const sourceElement = audioElement6.querySelector('source');
-                    sourceElement.src = newAudioData.url;
-                })
+                setTimeout(() => {
+                    fetch('/.netlify/functions/texttospeech', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: newData.result }),
+                    })
+                    .then(response => response.text())
+                    .then(textResponse => {
+                        const newAudioData = JSON.parse(textResponse)
+                        const sourceElement = audioElement6.querySelector('source');
+                        sourceElement.src = newAudioData.url;
+                    })
+                }, 2000)
             })
         }
 
@@ -142,17 +144,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement2.textContent = newData.result
                     
-                    fetch('/.netlify/functions/texttospeech', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: newData.result }),
-                    })
-                    .then(response => response.text())
-                    .then(textResponse => {
-                        const newAudioData = JSON.parse(textResponse)
-                        const sourceElement = audioElement2.querySelector('source');
-                        sourceElement.src = newAudioData.url;
-                    })
+                    setTimeout(() => {
+                        fetch('/.netlify/functions/texttospeech', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: newData.result }),
+                        })
+                        .then(response => response.text())
+                        .then(textResponse => {
+                            const newAudioData = JSON.parse(textResponse)
+                            const sourceElement = audioElement2.querySelector('source');
+                            sourceElement.src = newAudioData.url;
+                        })
+                    }, 2000)
 
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
@@ -169,17 +173,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement3.textContent = newData.result
                     
-                    fetch('/.netlify/functions/texttospeech', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: newData.result }),
-                    })
-                    .then(response => response.text())
-                    .then(textResponse => {
-                        const newAudioData = JSON.parse(textResponse)
-                        const sourceElement = audioElement3.querySelector('source');
-                        sourceElement.src = newAudioData.url;
-                    })
+                    setTimeout(() => {
+                        fetch('/.netlify/functions/texttospeech', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: newData.result }),
+                        })
+                        .then(response => response.text())
+                        .then(textResponse => {
+                            const newAudioData = JSON.parse(textResponse)
+                            const sourceElement = audioElement3.querySelector('source');
+                            sourceElement.src = newAudioData.url;
+                        })
+                    }, 2000)
 
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
@@ -195,17 +201,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement4.textContent = newData.result
 
-                    fetch('/.netlify/functions/texttospeech', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: newData.result }),
-                    })
-                    .then(response => response.text())
-                    .then(textResponse => {
-                        const newAudioData = JSON.parse(textResponse)
-                        const sourceElement = audioElement4.querySelector('source');
-                        sourceElement.src = newAudioData.url;
-                    })
+                    setTimeout(() => {
+                        fetch('/.netlify/functions/texttospeech', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: newData.result }),
+                        })
+                        .then(response => response.text())
+                        .then(textResponse => {
+                            const newAudioData = JSON.parse(textResponse)
+                            const sourceElement = audioElement4.querySelector('source');
+                            sourceElement.src = newAudioData.url;
+                        })
+                    }, 2000)
 
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
@@ -222,17 +230,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement5.textContent = newData.result
 
-                    fetch('/.netlify/functions/texttospeech', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text: newData.result }),
-                    })
-                    .then(response => response.text())
-                    .then(textResponse => {
-                        const newAudioData = JSON.parse(textResponse)
-                        const sourceElement = audioElement5.querySelector('source');
-                        sourceElement.src = newAudioData.url;
-                    })
+                    setTimeout(() => {
+                        fetch('/.netlify/functions/texttospeech', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: newData.result }),
+                        })
+                        .then(response => response.text())
+                        .then(textResponse => {
+                            const newAudioData = JSON.parse(textResponse)
+                            const sourceElement = audioElement5.querySelector('source');
+                            sourceElement.src = newAudioData.url;
+                        })
+                    }, 2000)
 
                     continueGeneration(count + 1, text + " " + newData.result)
                 })
@@ -268,11 +278,9 @@ document.addEventListener("DOMContentLoaded", function() {
     containers.forEach(container => {
         const source = container.querySelector('source');
         if (source) {
-            // Initially hide audio elements with empty src
             if (!source.getAttribute('src')) {
                 container.style.display = 'none';
             }
-            // Observe changes to the src attribute
             observer.observe(source, { attributes: true });
         }
     });
