@@ -10,7 +10,7 @@ const handler = async (event) => {
       const body = JSON.parse(event.body);  
       const prom = body.prompt;
       const text = body.text
-      const prompt = "We are creating a subtly educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 100 words that cleverly end the story (continue from where it left off)."
+      const prompt = "We are creating a subtly educational story in the form of a children's tale about the following:\n\n'" + prom + "'\n\nHere is the story so far:\n\n" + text + "\n\nPlease respond with about 75 words that cleverly end the story (continue from where it left off)."
 
       const API_KEY = process.env.API_KEY;
       const API_HOST = 'open-ai21.p.rapidapi.com';
@@ -27,7 +27,7 @@ const handler = async (event) => {
           "temperature": 0.9,
           "top_k": 5,
           "top_p": 0.9,
-          "max_tokens": 5000
+          "max_tokens": 200
       }
 
       const response = await fetch('https://open-ai21.p.rapidapi.com/conversationgpt35', {
