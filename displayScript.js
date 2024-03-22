@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = JSON.parse(textResponse);
         const innerData = JSON.parse(data.task_id);
         const taskId = innerData.data.task_id; 
+        
         const checkStatus = (startTime) => {
             if (new Date() - startTime > 20000) {
                 alert("Timeout: Image generation took too long.");
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     })
     .catch(error => {
-        storyElement.textContent = "Failed to generate image." + error;
+        alert(error);
     });
 
     // generate story
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         const newAudioData = JSON.parse(textResponse)
                         const sourceElement = audioElement6.querySelector('source');
                         sourceElement.src = newAudioData.url;
+                        display()
                     })
                 }, 2000)
             })
@@ -270,7 +272,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+function display () {
 
     const containers = document.querySelectorAll('.container');
 
@@ -297,4 +299,4 @@ document.addEventListener("DOMContentLoaded", function() {
             observer.observe(source, { attributes: true });
         }
     });
-});
+};
