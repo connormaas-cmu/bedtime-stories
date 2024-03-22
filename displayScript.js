@@ -15,29 +15,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     const audioElement6 = document.getElementById('audio6');
 
     // load our audio
-    // function loadAudio() {
+    function loadAudio() {
 
-    //     if (audioElement1.paused) {
-    //         audioElement1.load()
-    //     } 
-    //     if (audioElement2.paused) {
-    //         audioElement2.load()
-    //     } 
-    //     if (audioElement3.paused) {
-    //         audioElement3.load()
-    //     } 
-    //     // if (audioElement4.paused) {
-    //     //     audioElement4.load()
-    //     // } 
-    //     // if (audioElement5.paused) {
-    //     //     audioElement5.load()
-    //     // } 
-    //     if (audioElement6.paused) {
-    //         audioElement6.load()
-    //     } 
-    // }
+        if (audioElement1.paused) {
+            audioElement1.load()
+        } 
+        if (audioElement2.paused) {
+            audioElement2.load()
+        } 
+        if (audioElement3.paused) {
+            audioElement3.load()
+        } 
+        // if (audioElement4.paused) {
+        //     audioElement4.load()
+        // } 
+        // if (audioElement5.paused) {
+        //     audioElement5.load()
+        // } 
+        if (audioElement6.paused) {
+            audioElement6.load()
+        } 
+    }
     
-    // setInterval(loadAudio, 10000);
+    setInterval(loadAudio, 10000);
 
     // generate image
     fetch('/.netlify/functions/generate-image', {
@@ -277,9 +277,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     }); 
 });
 
+// display audio
 document.addEventListener("DOMContentLoaded", function() {
 
-    const containers = document.querySelectorAll('.containe2');
+    const containers = document.querySelectorAll('.container2');
 
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
