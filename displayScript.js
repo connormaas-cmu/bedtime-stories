@@ -275,46 +275,33 @@ document.addEventListener('DOMContentLoaded', async function() {
     .catch(error => {
         alert(error)
     }); 
-
-    // check
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    async function updateAudio() {
-        const containers = document.querySelectorAll('.container2');
-
-        for (const container of containers) {
-            const audio = container.querySelector('audio');
-            const source = audio.querySelector('source');
-            const src = source.getAttribute('src');
-
-            if (src) {
-                await delay(2000);
-                fetch('/.netlify/functions/check-audio', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url: src }),
-                })
-                .then(response => response.text())
-                .then(textResponse => {
-                    alert(textResponse)
-                    const newData = JSON.parse(textResponse);
-                    if (newData.result && newData.result.toLowerCase().includes("waiting")) {
-                        audio.style.display = 'none';
-                    } else {
-                        audio.load();
-                        audio.style.display = '';
-                    }
-                })
-                .catch(error => alert(error));
-            } else {
-                audio.style.display = 'none';
-            }
-        }
-    }
-
-    setInterval(updateAudio, 10000);
-
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    const containers = document.querySelectorAll('.containe2');
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                const source = mutation.target;
+                const audio = source.parentElement;
+                if (source.getAttribute('src')) {
+                    audio.parentElement.style.display = '';
+                } else {
+                    audio.parentElement.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    containers.forEach(container => {
+        const source = container.querySelector('source');
+        if (source) {
+            if (!source.getAttribute('src')) {
+                container.style.display = 'none';
+            }
+            observer.observe(source, { attributes: true });
+        }
+    });
+});
