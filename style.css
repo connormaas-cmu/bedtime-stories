@@ -4,10 +4,15 @@ body, html {
     font-family: Arial, sans-serif;
     background: #f8f9fa; 
     /* height: 100vh; */
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.outside {
+    margin-top: calc(50vh - 80px);
 }
 
 .container {
