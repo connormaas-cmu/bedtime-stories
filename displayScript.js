@@ -40,44 +40,46 @@ document.addEventListener('DOMContentLoaded', async function() {
     setInterval(loadAudio, 10000);
 
     // generate image
-    fetch('/.netlify/functions/generate-image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: userInput }),
-    })
-    .then(response => response.text())
-    .then(textResponse => {
-        const data = JSON.parse(textResponse);
-        const innerData = JSON.parse(data.task_id);
-        const taskId = innerData.data.task_id; 
-        
-        const checkStatus = (startTime) => {
-            if (new Date() - startTime > 30000) {
-                alert("Timeout: Image generation took too long.");
-                return;
-            }
-        
-            fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
-                .then(response => response.text())
-                .then(textContent => {
-                    if (textContent.includes("Image is still being processed.")) {
-                        setTimeout(() => checkStatus(startTime), 5000);
-                    } else {
-                        const data = JSON.parse(textContent);
-                        imageElement.src = data.image;
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-        };
+    async function generateImage(story) {
+        fetch('/.netlify/functions/generate-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: userInput, story: story }),
+        })
+        .then(response => response.text())
+        .then(textResponse => {
+            const data = JSON.parse(textResponse);
+            const innerData = JSON.parse(data.task_id);
+            const taskId = innerData.data.task_id; 
+            
+            const checkStatus = (startTime) => {
+                if (new Date() - startTime > 30000) {
+                    alert("Timeout: Image generation took too long.");
+                    return;
+                }
+            
+                fetch(`/.netlify/functions/check-image-status?task_id=${taskId}`)
+                    .then(response => response.text())
+                    .then(textContent => {
+                        if (textContent.includes("Image is still being processed.")) {
+                            setTimeout(() => checkStatus(startTime), 5000);
+                        } else {
+                            const data = JSON.parse(textContent);
+                            imageElement.src = data.image;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            };
 
-        checkStatus(new Date());
+            checkStatus(new Date());
 
-    })
-    .catch(error => {
-        alert(error);
-    });
+        })
+        .catch(error => {
+            alert(error);
+        });
+    }
 
     // generate story
     await fetch('/.netlify/functions/generate-story', {
@@ -89,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(textResponse => {
         const data = JSON.parse(textResponse);
         storyElement1.textContent = data.result
-        const sourceElement = audioElement1.querySelector('source');
+        generateImage(data.result)
 
         setTimeout(() => {
             const rawText = data.result
@@ -116,8 +118,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(response => response.text())
             .then(textResponse => {
                 const newData = JSON.parse(textResponse);
-                storyElement6.textContent = newData.result
-                const sourceElement = audioElement6.querySelector('source');
+                storyElement6.textContent = newData.result + " The end!"
                 
                 setTimeout(() => {
                     const newRawText = newData.result
@@ -184,7 +185,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
                     storyElement3.textContent = newData.result
-                    const sourceElement = audioElement3.querySelector('source');
                     
                     setTimeout(() => {
                         const newRawText = newData.result
