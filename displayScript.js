@@ -13,29 +13,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     // const audioElement5 = document.getElementById('audio5');
     const storyElement6 = document.getElementById('story6');
     const audioElement6 = document.getElementById('audio6');
+
+    // load our audio
+    // function loadAudio() {
+
+    //     if (audioElement1.paused) {
+    //         audioElement1.load()
+    //     } 
+    //     if (audioElement2.paused) {
+    //         audioElement2.load()
+    //     } 
+    //     if (audioElement3.paused) {
+    //         audioElement3.load()
+    //     } 
+    //     // if (audioElement4.paused) {
+    //     //     audioElement4.load()
+    //     // } 
+    //     // if (audioElement5.paused) {
+    //     //     audioElement5.load()
+    //     // } 
+    //     if (audioElement6.paused) {
+    //         audioElement6.load()
+    //     } 
+    // }
     
-    function loadAudio() {
-        if (audioElement1.paused) {
-            audioElement1.load()
-        } 
-        if (audioElement2.paused) {
-            audioElement2.load()
-        } 
-        if (audioElement3.paused) {
-            audioElement3.load()
-        } 
-        // if (audioElement4.paused) {
-        //     audioElement4.load()
-        // } 
-        // if (audioElement5.paused) {
-        //     audioElement5.load()
-        // } 
-        if (audioElement6.paused) {
-            audioElement6.load()
-        } 
-    }
-    
-    setInterval(loadAudio, 10000);
+    // setInterval(loadAudio, 10000);
 
     // generate image
     fetch('/.netlify/functions/generate-image', {
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const taskId = innerData.data.task_id; 
         
         const checkStatus = (startTime) => {
-            if (new Date() - startTime > 20000) {
+            if (new Date() - startTime > 30000) {
                 alert("Timeout: Image generation took too long.");
                 return;
             }
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(response => response.text())
                 .then(textContent => {
                     if (textContent.includes("Image is still being processed.")) {
-                        setTimeout(() => checkStatus(startTime), 2000);
+                        setTimeout(() => checkStatus(startTime), 5000);
                     } else {
                         const data = JSON.parse(textContent);
                         imageElement.src = data.image;
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     // generate story
-    fetch('/.netlify/functions/generate-story', {
+    await fetch('/.netlify/functions/generate-story', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
@@ -88,7 +90,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = JSON.parse(textResponse);
         storyElement1.textContent = data.result
         const sourceElement = audioElement1.querySelector('source');
-        sourceElement.src = "1";
 
         setTimeout(() => {
             const rawText = data.result
@@ -117,7 +118,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const newData = JSON.parse(textResponse);
                 storyElement6.textContent = newData.result
                 const sourceElement = audioElement6.querySelector('source');
-                sourceElement.src = "1";
                 
                 setTimeout(() => {
                     const newRawText = newData.result
@@ -153,7 +153,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement2.textContent = newData.result
                     const sourceElement = audioElement2.querySelector('source');
-                    sourceElement.src = "1";
                     
                     setTimeout(() => {
                         const newRawText = newData.result
@@ -186,7 +185,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const newData = JSON.parse(textResponse);
                     storyElement3.textContent = newData.result
                     const sourceElement = audioElement3.querySelector('source');
-                    sourceElement.src = "1";
                     
                     setTimeout(() => {
                         const newRawText = newData.result
@@ -219,7 +217,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             //         const newData = JSON.parse(textResponse);
             //         storyElement4.textContent = newData.result
             //          const sourceElement = audioElement4.querySelector('source');
-            //          sourceElement.src = "1";
             //
             //         setTimeout(() => {
             //             const newRawText = newData.result
@@ -252,7 +249,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             //         const newData = JSON.parse(textResponse);
             //         storyElement5.textContent = newData.result
             //         const sourceElement = audioElement5.querySelector('source');
-            //         sourceElement.src = "1";
             //
             //         setTimeout(() => {
             //             const newRawText = newData.result
@@ -278,37 +274,47 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
     .catch(error => {
         alert(error)
-        console.log(error);
     }); 
 
-});
+    // check
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-// display audio with text
-document.addEventListener("DOMContentLoaded", function() {
+    async function updateAudio() {
+        const containers = document.querySelectorAll('.container2');
 
-    const containers = document.querySelectorAll('.container2');
+        for (const container of containers) {
+            const audio = container.querySelector('audio');
+            const source = audio.querySelector('source');
+            const src = source.getAttribute('src');
 
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-                const source = mutation.target;
-                const audio = source.parentElement;
-                if (source.getAttribute('src')) {
-                    audio.parentElement.style.display = '';
-                } else {
-                    audio.parentElement.style.display = 'none';
-                }
+            if (src) {
+                await delay(2000);
+                fetch('/.netlify/functions/check-audio', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: src }),
+                })
+                .then(response => response.text())
+                .then(textResponse => {
+                    alert(textResponse)
+                    const newData = JSON.parse(textResponse);
+                    if (newData.result && newData.result.toLowerCase().includes("waiting")) {
+                        audio.style.display = 'none';
+                    } else {
+                        audio.load();
+                        audio.style.display = '';
+                    }
+                })
+                .catch(error => alert(error));
+            } else {
+                audio.style.display = 'none';
             }
-        });
-    });
-
-    containers.forEach(container => {
-        const source = container.querySelector('source');
-        if (source) {
-            if (!source.getAttribute('src')) {
-                container.style.display = 'none';
-            }
-            observer.observe(source, { attributes: true });
         }
-    });
+    }
+
+    setInterval(updateAudio, 10000);
+
 });
+
