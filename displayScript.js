@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 storyElement6.textContent = newData.result + " The end!"
                 
                 setTimeout(() => {
-                    const newRawText = newData.result
+                    const newRawText = newData.result + " The end!"
                     const newModText = newRawText.replace(/[.!?]/g, ",");
                     fetch('/.netlify/functions/generate-audio', {
                         method: 'POST',
