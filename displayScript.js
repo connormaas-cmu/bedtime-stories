@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     const storyElement6 = document.getElementById('story6');
     const audioElement6 = document.getElementById('audio6');
 
+    display()
+
     function loadAudio() {
         if (audioElement1.paused) {
             audioElement1.load()
