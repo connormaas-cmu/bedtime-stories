@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // const sourceElement = audioElement5.querySelector('source');
         const sourceElement6 = audioElement6.querySelector('source');
 
+        alert(sourceElement1.src)
+        alert(loaded1)
+
         if (audioElement1.paused && sourceElement1.src && !loaded1) {
             audioElement1.load()
             loaded1 = true
