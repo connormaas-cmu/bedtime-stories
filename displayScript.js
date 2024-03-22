@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 });
 
+// display audio with text
 document.addEventListener("DOMContentLoaded", function() {
 
     const containers = document.querySelectorAll('.container');
