@@ -3,7 +3,6 @@ body, html {
     padding: 0;
     font-family: Arial, sans-serif;
     background: #f8f9fa; 
-    /* height: 100vh; */
     margin-bottom: 100px;
     display: flex;
     flex-direction: column;
@@ -17,8 +16,8 @@ body, html {
 
 .container {
     text-align: center;
-    width: 100%; 
-    max-width: 80vw;
+    width: 80%; 
+    max-width: 1000px;
     padding: 20px;
     box-sizing: border-box;
 }
