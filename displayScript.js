@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const storyElement6 = document.getElementById('story6');
     const audioElement6 = document.getElementById('audio6');
 
-    display()
-
     function loadAudio() {
         if (audioElement1.paused) {
             audioElement1.load()
@@ -89,6 +87,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     .then(textResponse => {
         const data = JSON.parse(textResponse);
         storyElement1.textContent = data.result
+        const sourceElement = audioElement1.querySelector('source');
+        sourceElement.src = "1";
 
         setTimeout(() => {
             const rawText = data.result
@@ -116,6 +116,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             .then(textResponse => {
                 const newData = JSON.parse(textResponse);
                 storyElement6.textContent = newData.result
+                const sourceElement = audioElement6.querySelector('source');
+                sourceElement.src = "1";
                 
                 setTimeout(() => {
                     const newRawText = newData.result
@@ -130,7 +132,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                         const newAudioData = JSON.parse(textResponse)
                         const sourceElement = audioElement6.querySelector('source');
                         sourceElement.src = newAudioData.url;
-                        display()
                     })
                 }, 2000)
             })
@@ -151,6 +152,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
                     storyElement2.textContent = newData.result
+                    const sourceElement = audioElement2.querySelector('source');
+                    sourceElement.src = "1";
                     
                     setTimeout(() => {
                         const newRawText = newData.result
@@ -182,6 +185,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 .then(textResponse => {
                     const newData = JSON.parse(textResponse);
                     storyElement3.textContent = newData.result
+                    const sourceElement = audioElement3.querySelector('source');
+                    sourceElement.src = "1";
                     
                     setTimeout(() => {
                         const newRawText = newData.result
@@ -213,7 +218,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             //     .then(textResponse => {
             //         const newData = JSON.parse(textResponse);
             //         storyElement4.textContent = newData.result
-
+            //          const sourceElement = audioElement4.querySelector('source');
+            //          sourceElement.src = "1";
+            //
             //         setTimeout(() => {
             //             const newRawText = newData.result
             //             const newModText = newRawText.replace(/[.!?]/g, ",");
@@ -244,7 +251,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             //     .then(textResponse => {
             //         const newData = JSON.parse(textResponse);
             //         storyElement5.textContent = newData.result
-
+            //         const sourceElement = audioElement5.querySelector('source');
+            //         sourceElement.src = "1";
+            //
             //         setTimeout(() => {
             //             const newRawText = newData.result
             //             const newModText = newRawText.replace(/[.!?]/g, ",");
@@ -274,7 +283,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 });
 
-function display () {
+document.addEventListener("DOMContentLoaded", function() {
 
     const containers = document.querySelectorAll('.container');
 
@@ -301,4 +310,4 @@ function display () {
             observer.observe(source, { attributes: true });
         }
     });
-};
+});
