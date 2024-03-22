@@ -41,10 +41,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // generate image
     async function generateImage(story) {
+        const abrStory = story.substring(0, 200)
+
         fetch('/.netlify/functions/generate-image', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: userInput, story: story }),
+            body: JSON.stringify({ prompt: userInput, story: abrStory }),
         })
         .then(response => response.text())
         .then(textResponse => {

@@ -23,7 +23,7 @@ const handler = async (event) => {
       "height": 750,
       "width": 750,
       "model_name": "meinamix_meinaV9.safetensors",
-      "prompt": "Create an image to go in the book of a children's story given this theme: " + text + "\n\nThe story begins as follows: " + story
+      "prompt": "Create an image to go in the book of a children's story given this theme: " + text + "\n\nThe story begins as follows: " + story + "..."
     }
 
     const response = await fetch('https://omniinfer.p.rapidapi.com/v2/txt2img', {
