@@ -13,7 +13,7 @@ body, html {
 .container {
     text-align: center;
     width: 100%; 
-    max-width: 600px;
+    max-width: 80vw;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -55,6 +55,13 @@ button {
 
 button:hover {
     background-color: #1669c7;
+}
+
+#image {
+    width: 500px;
+    aspect-ratio: 1 / 1;
+    max-width: 80vw;
+    max-height: 80vw;
 }
 
 .title {
