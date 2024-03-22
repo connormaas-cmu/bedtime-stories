@@ -22,7 +22,7 @@ const handler = async (event) => {
                 }
             ],
             "web_access": false,
-            "system_prompt": '',
+            "system_prompt": 'Create the beggining of a story and do not end it',
             "temperature": 0.9,
             "top_k": 5,
             "top_p": 0.9,
