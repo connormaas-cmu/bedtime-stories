@@ -13,53 +13,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     // const audioElement5 = document.getElementById('audio5');
     const storyElement6 = document.getElementById('story6');
     const audioElement6 = document.getElementById('audio6');
-    let loaded1 = false
-    let loaded2 = false
-    let loaded3 = false
-    // let loaded4 = false
-    // let loaded5 = false
-    let loaded6 = false
 
     // load our audio
     function loadAudio() {
 
-        const sourceElement1 = audioElement1.querySelector('source');
-        const sourceElement2 = audioElement2.querySelector('source');
-        const sourceElement3 = audioElement3.querySelector('source');
-        // const sourceElement = audioElement4.querySelector('source');
-        // const sourceElement = audioElement5.querySelector('source');
-        const sourceElement6 = audioElement6.querySelector('source');
-
-        alert(sourceElement1.src)
-        alert(loaded1)
-
-        if (audioElement1.paused && sourceElement1.src && !loaded1) {
+        if (audioElement1.paused) {
             audioElement1.load()
-            loaded1 = true
         } 
-        if (audioElement2.paused && sourceElement2.src && !loaded2) {
+        if (audioElement2.paused) {
             audioElement2.load()
-            loaded2 = true
         } 
-        if (audioElement3.paused && sourceElement3.src && !loaded3) {
+        if (audioElement3.paused) {
             audioElement3.load()
-            loaded3 = true
         } 
-        // if (audioElement4.paused && sourceElement4.src && !loaded4) {
+        // if (audioElement4.paused) {
         //     audioElement4.load()
-        //     loaded4 = true
         // } 
-        // if (audioElement5.paused && sourceElement5.src && !loaded5) {
+        // if (audioElement5.paused) {
         //     audioElement5.load()
-        //     loaded5 = true
         // } 
-        if (audioElement6.paused && sourceElement6.src && !loaded6) {
+        if (audioElement6.paused) {
             audioElement6.load()
-            loaded6 = true
         } 
     }
     
-    setInterval(loadAudio, 5000);
+    setInterval(loadAudio, 10000);
 
     // generate image
     async function generateImage(story) {
